@@ -6,6 +6,10 @@ HOW TO COMPILE IF NEEDED:
 1. Compile the .o files "g++ *.cpp -c"
 4. Compile the program the exe "g++ -o adventure.exe *.o"
 
+Module 4 changes:
+- Added a few template functions in IRenderer that can render any parameter types
+- Used once in player.cpp to render string, int, string
+
 Module 3 changes:
 - Moved to a new repository due to problems with the previous one
 - Removed goldlib since I had to rework the gold files which were in the library to begin with

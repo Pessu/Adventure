@@ -26,6 +26,10 @@ Player::~Player()
 void Player::Attack(GameObject *pObject)
 {
 	int hp = pObject->GetHitpoints();
+
+	//Rendering 3 parameters as a sentence, string, int, string
+	game->GetRenderer()->Render("Player has ", hp, " hp!\n");
+
 	if ((rand() % 100) < 63)
 	{
 		// convert this into weapon
@@ -39,6 +43,7 @@ void Player::Attack(GameObject *pObject)
 		ostringstream s;
 		s << GetName() << " misses!\n";
 		game->GetRenderer()->Render(s.str());
+
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////
