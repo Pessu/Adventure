@@ -23,7 +23,8 @@
 #include "globals.h"
 #include "time.h"
 #include "Gold.h"
-#include <signal.h>
+#include <list>
+//#include <signal.h>
 ////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 #define DEV_NAME "anssi.grohn@pkamk.fi"
@@ -34,32 +35,41 @@ Game::Game() : running(true)
 {
   renderer = new TextRenderer();
 
+  rooms.push_back(new Dungeon());
+  rooms.at(0)->SetGame(this);
+  rooms.push_back(new Hallway());
+  rooms.at(1)->SetGame(this);
+  rooms.push_back(new MonsterRoom());
+  rooms.at(2)->SetGame(this);
+  rooms.push_back(new Chambers());
+  rooms.at(3)->SetGame(this);
+
+  rooms.at(0)->SetNextRoom(North,rooms.at(1));
+  rooms.at(1)->SetNextRoom(South,rooms.at(0));
+  rooms.at(1)->SetNextRoom(North,rooms.at(2));
+  rooms.at(2)->SetNextRoom(South,rooms.at(1));
+  rooms.at(2)->SetNextRoom(North,rooms.at(3));
+  rooms.at(3)->SetNextRoom(South,rooms.at(2));
+
+  currentRoom = rooms.at(0);
+
+  /*
   rooms[kDungeon] = new Dungeon();
   rooms[kDungeon]->SetGame(this);
-
   rooms[kHallway] = new Hallway();
   rooms[kHallway]->SetGame(this);
-
   rooms[kMonster] = new MonsterRoom();
   rooms[kMonster]->SetGame(this);
-  
   rooms[kChambers] = new Chambers();
   rooms[kChambers]->SetGame(this);
 
   rooms[kDungeon]->SetNextRoom(North,rooms[kHallway]);
-
   rooms[kHallway]->SetNextRoom(South,rooms[kDungeon]);
   rooms[kHallway]->SetNextRoom(North,rooms[kMonster]);
-
   rooms[kMonster]->SetNextRoom(South,rooms[kHallway]);
   rooms[kMonster]->SetNextRoom(North,rooms[kChambers]);
-
   rooms[kChambers]->SetNextRoom(South,rooms[kMonster]);
-  
-  currentRoom = rooms[kDungeon];
-
-
-
+  */
 }
 ////////////////////////////////////////////////////////////////////////////////
 Game::~Game()
@@ -71,6 +81,7 @@ void Game::Play()
 {
   string cmd;
   renderer->Render("Welcome to Fiends'n'Frogs adventure game!\n");
+
   ostringstream s;
   s << "by " << DEV_NAME << "(c) " << YEAR << ". Licensed under GPLv3.\n";
   renderer->Render(s.str());

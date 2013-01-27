@@ -13,6 +13,8 @@ class Room;
 enum RoomId { kDungeon, kHallway, kMonster, kChambers, kNumRooms };
 #include "Player.h"
 #include "Enemy.h"
+#include <list>
+#include <vector>
 ////////////////////////////////////////////////////////////////////////////////
 class Game 
 {
@@ -20,7 +22,8 @@ private:
   bool running;
   Player player;
   IRenderer *renderer;
-  Room      *rooms[kNumRooms]; ///< Map.
+  //Room      *rooms[kNumRooms]; ///< Map.
+  vector <Room*> rooms;
   Room      *currentRoom;
 public:
   int currentGold;

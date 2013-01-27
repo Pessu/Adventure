@@ -6,6 +6,11 @@ HOW TO COMPILE IF NEEDED:
 1. Compile the .o files "g++ *.cpp -c"
 4. Compile the program the exe "g++ -o adventure.exe *.o"
 
+Module 5 changes:
+Added vectors in game and room classes
+Added another vector to monsterroomm (i like vectors)
+Fixed a bug from gold class
+
 Module 4 changes:
 - Added a few template functions in IRenderer that can render any parameter types
 - Used once in player.cpp to render string, int, string

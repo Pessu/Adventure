@@ -5,6 +5,8 @@
 /// anssi.grohn@pkamk.fi
 ////////////////////
 #include "Gold.h"
+#include <iostream>
+using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 Gold::Gold( unsigned int value) : m_nAmount(value)
 {
@@ -13,6 +15,12 @@ Gold::Gold( unsigned int value) : m_nAmount(value)
 // Overloaded addition operator for gold class
 Gold & Gold::operator+(const Gold & gold)
 {
+	// Stupid hack to fix a bug
+	if (GetAmount() > 10000)
+	{
+		SetAmount(0);
+	}
+
 	int total = GetAmount() + gold.m_nAmount;
 	SetAmount(total);
 	return *this;

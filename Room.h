@@ -10,6 +10,8 @@
 #include <string>
 #include "Updateable.h"
 #include "globals.h"
+#include <vector>
+using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 class MoveCommand;
 class AttackCommand;
@@ -18,7 +20,8 @@ class Game;
 class Room : public Updateable 
 {
 private:
-  Room *        rooms[kNumDirs];
+  //Room *      rooms[kNumDirs];
+  vector <Room*>  rooms;
   std::string   description;
   Game *        game;
   bool			alreadyVisited;

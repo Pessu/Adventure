@@ -10,31 +10,34 @@
 #include "Enemy.h"
 #include <sstream>
 #include "MoveCommand.h"
+#include <vector>
 ////////////////////////////////////////////////////////////////////////////////
 class MonsterRoom : public Room
 {
 private:
+  vector <Enemy> enemy;
   Enemy e;
   bool noticedPlayer;
 public:
   MonsterRoom()
   {
     noticedPlayer = false;
-    e.SetName( "Orc");
-    SetDescription("You are in the monster room. There is an orc here!");
+    enemy.push_back(e);
+    enemy.at(0).SetName("Goblin");
+    SetDescription("You are in the monster room. There is a goblin here!");
   }
   ////////////////////
   /// Makes enemy attack player once on every turn.
   void Update()
   {
-    if ( e.IsAlive() && noticedPlayer )
+    if ( enemy.at(0).IsAlive() && noticedPlayer )
     {
       std::ostringstream s;
       Player & player = GetGame()->GetPlayer();
-      s << e.GetName() << " attacks " << player.GetName() << "\n";
+      s << enemy.at(0).GetName() << " attacks " << player.GetName() << "\n";
       GetGame()->GetRenderer()->Render(s.str());
 
-      e.Attack(&player);
+      enemy.at(0).Attack(&player);
     }
     noticedPlayer = true;
   }
@@ -44,7 +47,7 @@ public:
   /// \return Room pointer to next available room, NULL if none available.
   Room * OnMoveCommand( MoveCommand *pCommand )
   {
-    if ( e.IsAlive())
+    if ( enemy.at(0).IsAlive())
     {
       return NULL;
     }
@@ -54,18 +57,19 @@ public:
   
   void OnAttack( AttackCommand *pCommand )
   {
-    if ( e.IsAlive() && noticedPlayer)
+    if ( enemy.at(0).IsAlive() && noticedPlayer)
     {
       Player & player = GetGame()->GetPlayer();
       std::ostringstream s;
-      s << player.GetName() << " attacks " << e.GetName() << "\n";
+      s << player.GetName() << " attacks " << enemy.at(0).GetName() << "\n";
       GetGame()->GetRenderer()->Render(s.str());
-      player.Attack( &e );
+      player.Attack(&enemy.at(0));
       // Change room description a bit
-      if ( e.IsAlive() == false )
+      if ( enemy.at(0).IsAlive() == false )
       {
+    	  noticedPlayer = false;
     	  player.SetExperience(player.GetExperience()+1);
-    	  SetDescription("You are in the monster room. There is a pretty dead orc here.");
+    	  SetDescription("You are in the monster room. There is a jolly dead goblin here.");
       }
     } 
     else 
