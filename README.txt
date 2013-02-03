@@ -6,6 +6,11 @@ HOW TO COMPILE IF NEEDED:
 1. Compile the .o files "g++ *.cpp -c"
 4. Compile the program the exe "g++ -o adventure.exe *.o"
 
+Module 6 changes:
+Added three different ways for counting the total amount of gold into game.cpp
+One with a functor instead of iterator, one with a labda function and one with a
+range based loop. Also added a used getmax and auto keyword in the assignment.
+
 Module 5 changes:
 Added vectors in game and room classes
 Added another vector to monsterroomm (i like vectors)
