@@ -19,9 +19,21 @@ Gold * GoldFactory::Create( size_t amount)
   Gold * pGoldFound = new Gold(amount);
   // Add this search into totals
   *pGoldTotal = (*pGoldTotal + *pGoldFound);
-  // Prints total booty
-  std::cout << "Total loot -> " << pGoldTotal->GetAmount() << endl;
 
+ // std::cout << "Gold Found " << pGoldFound->GetAmount() << endl;
+
+  // Prints total booty
+  //std::cout << "Total loot " << pGoldTotal->GetAmount() << " gold!" <<endl;
+
+
+  //totals.push_back(pGoldTotal);
+  /*
+  for(it = totals.begin(); it != totals.end(); ++it)
+  {
+	  Gold *g = *it;
+	  cout << g->GetAmount();
+  }
+  */
   return pGoldFound;
 }
 ////////////////////////////////////////////////////////////////////////////////

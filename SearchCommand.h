@@ -23,10 +23,13 @@ public:
     {
       GoldFactory f;
       Gold *g = f.Create( 1+rand()%100);
+      int gg = g->GetAmount();
       GetGame()->SetCurrentGold(g->GetAmount());
       std::ostringstream s;
       s << "You found " << g->GetAmount() << " gold!\n";
       GetGame()->GetRenderer()->Render(s.str());
+      if (GetGame()->GetCurrentGold() > 0 && GetGame()->GetCurrentGold() != gg)
+  		cout << "You now have " << GetGame()->GetCurrentGold()<< " gold!\n";
       delete g;
     }
     else

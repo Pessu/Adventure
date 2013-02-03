@@ -10,9 +10,11 @@
 class TextRenderer : public IRenderer
 {
 public:
+
   void Render( const std::string & str )
   {
     std::cout << str;
   }
+
 };
 ////////////////////////////////////////////////////////////////////////////////
